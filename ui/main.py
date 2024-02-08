@@ -11,14 +11,14 @@ import plotly.express as px
 
 @st.cache_data
 def load_data():
-    raw_df = pd.read_csv(os.path.join("..", "Datasets", "listings.csv"))
-    df = pd.read_csv(os.path.join("..", "Datasets", "listings_new.csv"))
+    raw_df = pd.read_csv(os.path.join("Datasets", "listings.csv"))
+    df = pd.read_csv(os.path.join("Datasets", "listings_new.csv"))
     return raw_df, df
 
 
 @st.cache_resource
 def load_model(model_name):
-    return pickle.load(open(os.path.join("..", "Models", model_name), "rb"))
+    return pickle.load(open(os.path.join("Models", model_name), "rb"))
 
 
 # @st.cache_data
