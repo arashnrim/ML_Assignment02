@@ -160,11 +160,11 @@ if option == "Problem 2: Listing Prices":
     models = [
         {"name": "Linear regression", "description": "Linear regression is a simple and commonly used algorithm for predicting numerical values. It assumes a linear relationship between the input features and the target variable. The algorithm finds the best-fit line that minimizes the difference between the predicted and actual values. It is suitable for problems where the relationship between the features and the target variable is approximately linear.", "short_name": "lr"},
         {"name": "Support vector machine", "description": "Support vector machine (SVM) is a powerful algorithm used for both classification and regression tasks. It works by finding the optimal hyperplane that separates the data points into different classes or predicts the numerical values. SVM aims to maximize the margin between the support vectors (data points closest to the decision boundary) and the hyperplane. It is effective in handling complex datasets with non-linear relationships.", "short_name": "svm"},
-        {"name": "Multilayered perceptron",
-            "description": "Multilayered perceptron (MLP) is a type of artificial neural network that consists of multiple layers of interconnected nodes called neurons. Each neuron applies a non-linear activation function to the weighted sum of its inputs. MLP is capable of learning complex patterns and relationships in the data. It is widely used for various tasks, including classification and regression.", "short_name": "mlp"},
+        # {"name": "Multilayered perceptron",
+        #     "description": "Multilayered perceptron (MLP) is a type of artificial neural network that consists of multiple layers of interconnected nodes called neurons. Each neuron applies a non-linear activation function to the weighted sum of its inputs. MLP is capable of learning complex patterns and relationships in the data. It is widely used for various tasks, including classification and regression.", "short_name": "mlp"},
         {"name": "AdaBoost", "description": "AdaBoost (Adaptive Boosting) is an ensemble learning algorithm that combines multiple weak classifiers to create a strong classifier. Each weak classifier is trained on a subset of the data, and the algorithm assigns higher weights to misclassified samples in each iteration. AdaBoost iteratively improves the performance by focusing on the difficult samples. It is particularly effective in handling imbalanced datasets and can be used for both classification and regression problems.", "short_name": "ab"}]
 models_tab.title("Models used for prediction")
-lr_tab, svm_tab, mlp_tab, ab_tab = models_tab.tabs(
+lr_tab, svm_tab, ab_tab = models_tab.tabs(
     [model["name"] for model in models])
 
 # Setting up the training and testing data for the models
@@ -178,7 +178,7 @@ kallang_y = kallang_df["price"]
 kallang_X_train, kallang_X_test, kallang_y_train, kallang_y_test = train_test_split(
     kallang_X, kallang_y, test_size=0.3, random_state=rng)
 
-for index, tab in enumerate([lr_tab, svm_tab, mlp_tab, ab_tab]):
+for index, tab in enumerate([lr_tab, svm_tab, ab_tab]):
     tab.title(models[index]["name"])
     tab.markdown(models[index]["description"])
 
