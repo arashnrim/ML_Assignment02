@@ -6,6 +6,7 @@ from sklearn.preprocessing import OrdinalEncoder
 from sklearn.model_selection import cross_validate, train_test_split
 import pickle
 import os
+import plotly.express as px
 
 
 @st.cache_data
@@ -137,8 +138,21 @@ kallang_df = neighborhoods[15][1]
 cols = explore_tab.columns(2)
 cols[0].header("Central Region listings")
 cols[0].dataframe(central_df, use_container_width=True)
+
+features = ["neighbourhood", "room_type",
+            "minimum_nights", "number_of_reviews", "availability_365"]
+for feature in features:
+    fig = px.bar(central_df, x=feature, y="price")
+    cols[0].plotly_chart(fig, use_container_width=True)
+
 cols[1].header("Kallang listings")
 cols[1].dataframe(kallang_df, use_container_width=True)
+
+features = ["room_type", "minimum_nights",
+            "number_of_reviews", "availability_365"]
+for feature in features:
+    fig = px.bar(kallang_df, x=feature, y="price")
+    cols[1].plotly_chart(fig, use_container_width=True)
 
 # Models tab
 models = []
@@ -151,7 +165,7 @@ if option == "Problem 2: Listing Prices":
         {"name": "AdaBoost", "description": "AdaBoost (Adaptive Boosting) is an ensemble learning algorithm that combines multiple weak classifiers to create a strong classifier. Each weak classifier is trained on a subset of the data, and the algorithm assigns higher weights to misclassified samples in each iteration. AdaBoost iteratively improves the performance by focusing on the difficult samples. It is particularly effective in handling imbalanced datasets and can be used for both classification and regression problems.", "short_name": "ab"}]
 models_tab.title("Models used for prediction")
 lr_tab, svm_tab, mlp_tab, ab_tab = models_tab.tabs(
-    [model["name"]for model in models])
+    [model["name"] for model in models])
 
 # Setting up the training and testing data for the models
 central_X = central_df.drop("price", axis=1)
